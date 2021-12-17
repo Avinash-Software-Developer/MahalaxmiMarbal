@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Mahalaxmi_MarbelsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Tabel_Customer">
+    <Key>
+      <PropertyRef Name="Cust_Id" />
+    </Key>
+    <Property Name="Cust_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustName" Type="nvarchar" MaxLength="100" />
+    <Property Name="CustPh" Type="nvarchar" MaxLength="10" />
+    <Property Name="CustAddress" Type="nvarchar(max)" />
+    <Property Name="CustEmail" Type="nvarchar" MaxLength="100" />
+    <Property Name="Date" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Table_Bill">
+    <Key>
+      <PropertyRef Name="Bill_ID" />
+    </Key>
+    <Property Name="Bill_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Product_id" Type="int" />
+    <Property Name="Cust_Id" Type="int" />
+    <Property Name="TotalCost" Type="nvarchar" MaxLength="50" />
+    <Property Name="TotalQuantity" Type="nvarchar" MaxLength="50" />
+    <Property Name="Discount" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Table_Product">
+    <Key>
+      <PropertyRef Name="Product_id" />
+    </Key>
+    <Property Name="Product_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PName" Type="nvarchar" MaxLength="100" />
+    <Property Name="PPrice" Type="int" />
+    <Property Name="PQuantity" Type="int" />
+  </EntityType>
+  <EntityType Name="Table_Vendor_Registration">
+    <Key>
+      <PropertyRef Name="Vendor_id" />
+    </Key>
+    <Property Name="Vendor_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Vendor_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Shop_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Vendor_Phone" Type="nvarchar" MaxLength="15" />
+    <Property Name="Shop_Phone" Type="nvarchar" MaxLength="15" />
+    <Property Name="Shop_Address" Type="nvarchar(max)" />
+    <Property Name="Vendor_Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Product_1" Type="nvarchar" MaxLength="50" />
+    <Property Name="Product_2" Type="nvarchar" MaxLength="50" />
+    <Property Name="Product_3" Type="nvarchar" MaxLength="50" />
+    <Property Name="Product_4" Type="nvarchar" MaxLength="50" />
+    <Property Name="Product_5" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Function Name="Customer_Deatils" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CustId" Type="int" Mode="In" />
+    <Parameter Name="CustName" Type="nvarchar" Mode="In" />
+    <Parameter Name="CustPh" Type="nvarchar" Mode="In" />
+    <Parameter Name="CustAddress" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="CustEmail" Type="nvarchar" Mode="In" />
+    <Parameter Name="Date" Type="nvarchar" Mode="In" />
+    <Parameter Name="Flag" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="Product_Deatils" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Product_id" Type="int" Mode="In" />
+    <Parameter Name="Product_Name" Type="nvarchar" Mode="In" />
+    <Parameter Name="flag" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="Vendor_Details" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Vendor_id" Type="int" Mode="In" />
+    <Parameter Name="Vendor_Name" Type="nvarchar" Mode="In" />
+    <Parameter Name="Shop_Name" Type="nvarchar" Mode="In" />
+    <Parameter Name="Vendor_Phone" Type="nvarchar" Mode="In" />
+    <Parameter Name="Shop_Phone" Type="nvarchar" Mode="In" />
+    <Parameter Name="Shop_Address" Type="nvarchar" Mode="In" />
+    <Parameter Name="Vendor_Email" Type="nvarchar" Mode="In" />
+    <Parameter Name="flag" Type="nvarchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="Mahalaxmi_MarbelsModelStoreContainer">
+    <EntitySet Name="Tabel_Customer" EntityType="Self.Tabel_Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Table_Bill" EntityType="Self.Table_Bill" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Table_Product" EntityType="Self.Table_Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Table_Vendor_Registration" EntityType="Self.Table_Vendor_Registration" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

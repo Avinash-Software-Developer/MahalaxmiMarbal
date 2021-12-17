@@ -1,0 +1,98 @@
+﻿@model IEnumerable<MahalaxmiMarbal.Models.Tabel_Customer>
+
+@{
+    ViewBag.Title = "CustomerDeatilsAll";
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
+}
+<link href="~/Content/SuperAdmin/dataTables.bootstrap4.css" rel="stylesheet" />
+
+
+<div class="content-wrapper">
+
+    <div class="row" style="background-color:#343a40;">
+
+        <div class="col-12 col-sm-6 col-md-4">
+
+            @Html.ActionLink("Create New", "AddCustomer", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-primary btn-large " })
+
+        </div>
+        <div class="col-12 col-sm-6 col-md-8">
+            <h4><b style="font-style:normal; color:white;">CUSTOMER DETAILS</b></h4>
+
+        </div>
+
+    </div>
+    <br />
+    <table class="table table-bordered table-hover table-sm" id="example">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cust_Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CustName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CustPh)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CustAddress)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CustEmail)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
+                <th>Action</th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cust_Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustPh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustEmail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "CustomerDetails", new { id=item.Cust_Id  }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+
+        }
+            </tbody>
+    </table>
+</div>
+<script src="~/Scripts/SuperAdmin/jquery.min.js"></script>
+<script src="~/Scripts/SuperAdmin/jquery.dataTables.js"></script>
+<script src="~/Scripts/SuperAdmin/dataTables.bootstrap4.js"></script>
+<script>
+        $(function () {
+        
+            $('#example').DataTable({
+                "paging": true,
+                "ordering": true,
+                "info": true,                
+            });
+        });
+</script>

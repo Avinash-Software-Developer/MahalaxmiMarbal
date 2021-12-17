@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Mahalaxmi_MarbelsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Tabel_Customer">
+    <Key>
+      <PropertyRef Name="Cust_Id" />
+    </Key>
+    <Property Name="Cust_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CustName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CustPh" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="CustAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CustEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Date" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Table_Bill">
+    <Key>
+      <PropertyRef Name="Bill_ID" />
+    </Key>
+    <Property Name="Bill_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Product_id" Type="Int32" />
+    <Property Name="Cust_Id" Type="Int32" />
+    <Property Name="TotalCost" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TotalQuantity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Discount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Table_Product">
+    <Key>
+      <PropertyRef Name="Product_id" />
+    </Key>
+    <Property Name="Product_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="PPrice" Type="Int32" />
+    <Property Name="PQuantity" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Table_Vendor_Registration">
+    <Key>
+      <PropertyRef Name="Vendor_id" />
+    </Key>
+    <Property Name="Vendor_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Vendor_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Shop_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Vendor_Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Shop_Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Shop_Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Vendor_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Product_1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Product_2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Product_3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Product_4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Product_5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityContainer Name="Mahalaxmi_MarbelsEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Tabel_Customer" EntityType="Self.Tabel_Customer" />
+    <EntitySet Name="Table_Bill" EntityType="Self.Table_Bill" />
+    <EntitySet Name="Table_Product" EntityType="Self.Table_Product" />
+    <EntitySet Name="Table_Vendor_Registration" EntityType="Self.Table_Vendor_Registration" />
+    <FunctionImport Name="Customer_Deatils" ReturnType="Collection(Mahalaxmi_MarbelsModel.Customer_Deatils_Result)">
+      <Parameter Name="CustId" Mode="In" Type="Int32" />
+      <Parameter Name="CustName" Mode="In" Type="String" />
+      <Parameter Name="CustPh" Mode="In" Type="String" />
+      <Parameter Name="CustAddress" Mode="In" Type="String" />
+      <Parameter Name="CustEmail" Mode="In" Type="String" />
+      <Parameter Name="Date" Mode="In" Type="String" />
+      <Parameter Name="Flag" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Product_Deatils">
+      <Parameter Name="Product_id" Mode="In" Type="Int32" />
+      <Parameter Name="Product_Name" Mode="In" Type="String" />
+      <Parameter Name="flag" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Vendor_Details">
+      <Parameter Name="Vendor_id" Mode="In" Type="Int32" />
+      <Parameter Name="Vendor_Name" Mode="In" Type="String" />
+      <Parameter Name="Shop_Name" Mode="In" Type="String" />
+      <Parameter Name="Vendor_Phone" Mode="In" Type="String" />
+      <Parameter Name="Shop_Phone" Mode="In" Type="String" />
+      <Parameter Name="Shop_Address" Mode="In" Type="String" />
+      <Parameter Name="Vendor_Email" Mode="In" Type="String" />
+      <Parameter Name="flag" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="Customer_Deatils_Result">
+    <Property Type="Int32" Name="Cust_Id" Nullable="false" />
+    <Property Type="String" Name="CustName" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="CustPh" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="CustAddress" Nullable="true" />
+    <Property Type="String" Name="CustEmail" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Date" Nullable="true" MaxLength="50" />
+  </ComplexType>
+</Schema>

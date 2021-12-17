@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Mahalaxmi_MarbelsModelStoreContainer" CdmEntityContainer="Mahalaxmi_MarbelsEntities">
+    <EntitySetMapping Name="Tabel_Customer">
+      <EntityTypeMapping TypeName="Mahalaxmi_MarbelsModel.Tabel_Customer">
+        <MappingFragment StoreEntitySet="Tabel_Customer">
+          <ScalarProperty Name="Cust_Id" ColumnName="Cust_Id" />
+          <ScalarProperty Name="CustName" ColumnName="CustName" />
+          <ScalarProperty Name="CustPh" ColumnName="CustPh" />
+          <ScalarProperty Name="CustAddress" ColumnName="CustAddress" />
+          <ScalarProperty Name="CustEmail" ColumnName="CustEmail" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Table_Bill">
+      <EntityTypeMapping TypeName="Mahalaxmi_MarbelsModel.Table_Bill">
+        <MappingFragment StoreEntitySet="Table_Bill">
+          <ScalarProperty Name="Bill_ID" ColumnName="Bill_ID" />
+          <ScalarProperty Name="Product_id" ColumnName="Product_id" />
+          <ScalarProperty Name="Cust_Id" ColumnName="Cust_Id" />
+          <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+          <ScalarProperty Name="TotalQuantity" ColumnName="TotalQuantity" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Table_Product">
+      <EntityTypeMapping TypeName="Mahalaxmi_MarbelsModel.Table_Product">
+        <MappingFragment StoreEntitySet="Table_Product">
+          <ScalarProperty Name="Product_id" ColumnName="Product_id" />
+          <ScalarProperty Name="PName" ColumnName="PName" />
+          <ScalarProperty Name="PPrice" ColumnName="PPrice" />
+          <ScalarProperty Name="PQuantity" ColumnName="PQuantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Table_Vendor_Registration">
+      <EntityTypeMapping TypeName="Mahalaxmi_MarbelsModel.Table_Vendor_Registration">
+        <MappingFragment StoreEntitySet="Table_Vendor_Registration">
+          <ScalarProperty Name="Vendor_id" ColumnName="Vendor_id" />
+          <ScalarProperty Name="Vendor_Name" ColumnName="Vendor_Name" />
+          <ScalarProperty Name="Shop_Name" ColumnName="Shop_Name" />
+          <ScalarProperty Name="Vendor_Phone" ColumnName="Vendor_Phone" />
+          <ScalarProperty Name="Shop_Phone" ColumnName="Shop_Phone" />
+          <ScalarProperty Name="Shop_Address" ColumnName="Shop_Address" />
+          <ScalarProperty Name="Vendor_Email" ColumnName="Vendor_Email" />
+          <ScalarProperty Name="Product_1" ColumnName="Product_1" />
+          <ScalarProperty Name="Product_2" ColumnName="Product_2" />
+          <ScalarProperty Name="Product_3" ColumnName="Product_3" />
+          <ScalarProperty Name="Product_4" ColumnName="Product_4" />
+          <ScalarProperty Name="Product_5" ColumnName="Product_5" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Customer_Deatils" FunctionName="Mahalaxmi_MarbelsModel.Store.Customer_Deatils">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Mahalaxmi_MarbelsModel.Customer_Deatils_Result">
+          <ScalarProperty Name="Cust_Id" ColumnName="Cust_Id" />
+          <ScalarProperty Name="CustName" ColumnName="CustName" />
+          <ScalarProperty Name="CustPh" ColumnName="CustPh" />
+          <ScalarProperty Name="CustAddress" ColumnName="CustAddress" />
+          <ScalarProperty Name="CustEmail" ColumnName="CustEmail" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Product_Deatils" FunctionName="Mahalaxmi_MarbelsModel.Store.Product_Deatils" />
+    <FunctionImportMapping FunctionImportName="Vendor_Details" FunctionName="Mahalaxmi_MarbelsModel.Store.Vendor_Details" />
+  </EntityContainerMapping>
+</Mapping>

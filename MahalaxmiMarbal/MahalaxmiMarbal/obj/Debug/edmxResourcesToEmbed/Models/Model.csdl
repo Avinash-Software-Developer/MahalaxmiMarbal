@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Mahalaxmi_MarbelsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Tabel_Customer">
+    <Key>
+      <PropertyRef Name="Cust_Id" />
+    </Key>
+    <Property Name="Cust_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CustName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CustPh" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="CustAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CustEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Date" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Table_Bill">
+    <Key>
+      <PropertyRef Name="Bill_ID" />
+    </Key>
+    <Property Name="Bill_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Product_id" Type="Int32" />
+    <Property Name="Cust_Id" Type="Int32" />
+    <Property Name="TotalCost" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TotalQuantity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Discount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Table_OrderDeatils">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductDetailsId" Type="Int32" />
+    <Property Name="CustomerId" Type="Int32" />
+    <Property Name="TotalAmount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TotalDiscount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FinalAmount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Table_Product">
+    <Key>
+      <PropertyRef Name="Product_id" />
+    </Key>
+    <Property Name="Product_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UpdatedDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Table_ProductDetails" Relationship="Self.FK_Table_ProductDetails_Table_Product" FromRole="Table_Product" ToRole="Table_ProductDetails" />
+  </EntityType>
+  <EntityType Name="Table_ProductDetails">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductId" Type="Int32" />
+    <Property Name="VendorId" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Size" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Amount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SellingAmount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UpdatedDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Quantity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Table_Product" Relationship="Self.FK_Table_ProductDetails_Table_Product" FromRole="Table_ProductDetails" ToRole="Table_Product" />
+    <NavigationProperty Name="Table_Vendor_Registration" Relationship="Self.FK_Table_ProductDetails_Table_Vendor_Registration" FromRole="Table_ProductDetails" ToRole="Table_Vendor_Registration" />
+  </EntityType>
+  <EntityType Name="Table_Registration">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Mobile" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Table_Vendor_Registration">
+    <Key>
+      <PropertyRef Name="Vendor_id" />
+    </Key>
+    <Property Name="Vendor_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Vendor_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Shop_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Vendor_Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Shop_Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Shop_Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Vendor_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Table_ProductDetails" Relationship="Self.FK_Table_ProductDetails_Table_Vendor_Registration" FromRole="Table_Vendor_Registration" ToRole="Table_ProductDetails" />
+  </EntityType>
+  <Association Name="FK_Table_ProductDetails_Table_Product">
+    <End Role="Table_Product" Type="Self.Table_Product" Multiplicity="0..1" />
+    <End Role="Table_ProductDetails" Type="Self.Table_ProductDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Table_Product">
+        <PropertyRef Name="Product_id" />
+      </Principal>
+      <Dependent Role="Table_ProductDetails">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Table_ProductDetails_Table_Vendor_Registration">
+    <End Role="Table_Vendor_Registration" Type="Self.Table_Vendor_Registration" Multiplicity="0..1" />
+    <End Role="Table_ProductDetails" Type="Self.Table_ProductDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Table_Vendor_Registration">
+        <PropertyRef Name="Vendor_id" />
+      </Principal>
+      <Dependent Role="Table_ProductDetails">
+        <PropertyRef Name="VendorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Mahalaxmi_MarbelsEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Tabel_Customer" EntityType="Self.Tabel_Customer" />
+    <EntitySet Name="Table_Bill" EntityType="Self.Table_Bill" />
+    <EntitySet Name="Table_OrderDeatils" EntityType="Self.Table_OrderDeatils" />
+    <EntitySet Name="Table_Product" EntityType="Self.Table_Product" />
+    <EntitySet Name="Table_ProductDetails" EntityType="Self.Table_ProductDetails" />
+    <EntitySet Name="Table_Registration" EntityType="Self.Table_Registration" />
+    <EntitySet Name="Table_Vendor_Registration" EntityType="Self.Table_Vendor_Registration" />
+    <AssociationSet Name="FK_Table_ProductDetails_Table_Product" Association="Self.FK_Table_ProductDetails_Table_Product">
+      <End Role="Table_Product" EntitySet="Table_Product" />
+      <End Role="Table_ProductDetails" EntitySet="Table_ProductDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Table_ProductDetails_Table_Vendor_Registration" Association="Self.FK_Table_ProductDetails_Table_Vendor_Registration">
+      <End Role="Table_Vendor_Registration" EntitySet="Table_Vendor_Registration" />
+      <End Role="Table_ProductDetails" EntitySet="Table_ProductDetails" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,61 @@
+﻿@model IEnumerable<MahalaxmiMarbal.Models.Table_Product>
+
+@{
+    ViewBag.Title = "AllProductsDetails";
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
+}
+
+<div class="content-wrapper">
+    <h2>AllProductsDetails</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                 @Html.DisplayNameFor(model => model.Product_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product_id)
+                </td>
+                <td>
+                    <a href="~/Product/AllSubProductsDetails?id=item.Product_id">  @Html.DisplayFor(modelItem => item.PName) </a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdatedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "UpdateProduct", new { id = item.Product_id }) |
+                    @Html.ActionLink("Details", "ProductDetails", new { id = item.Product_id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Product_id })
+                </td>
+            </tr>
+        }
+
+    </table>
+ </div>

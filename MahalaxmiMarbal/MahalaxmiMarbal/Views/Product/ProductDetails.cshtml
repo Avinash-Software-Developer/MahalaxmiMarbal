@@ -1,0 +1,61 @@
+﻿@model MahalaxmiMarbal.Models.Table_Product
+
+@{
+    ViewBag.Title = "ProductDetails";
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
+}
+
+<div class="content-wrapper">
+    <h2>Product Details</h2>
+
+    <div>
+        
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Product_id)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Product_id)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CreatedDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UpdatedDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UpdatedDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</div>

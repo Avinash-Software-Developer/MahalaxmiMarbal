@@ -1,0 +1,101 @@
+﻿@model IEnumerable<MahalaxmiMarbal.Models.Table_Vendor_Registration>
+
+@{
+    ViewBag.Title = "AllVendorDeatils";
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
+}
+<link href="~/Content/SuperAdmin/dataTables.bootstrap4.css" rel="stylesheet" />
+<link href="~/Content/SuperAdmin/adminlte.min.css" rel="stylesheet" />
+
+<div class="content-wrapper">
+    <div class="row" style="background-color:#343a40;">
+
+        <div class="col-12 col-sm-6 col-md-4">
+
+            @Html.ActionLink("Create New", "Create", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-primary btn-large " })
+
+        </div>
+        <div class="col-12 col-sm-6 col-md-8">
+            <h4><b style="font-style:normal; color:white">VENDOR DETAILS</b></h4>
+
+        </div>
+
+    </div>
+    <br />
+    <table class="table table-sm table-responsive table-bordered" id="example">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Vendor_id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Vendor_Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Shop_Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Vendor_Phone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Shop_Phone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Shop_Address)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Vendor_Email)
+                </th>
+                
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Vendor_id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Vendor_Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Shop_Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Vendor_Phone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Shop_Phone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Shop_Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Vendor_Email)
+                    </td>
+                   
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<script src="~/Scripts/SuperAdmin/jquery.min.js"></script>
+<script src="~/Scripts/SuperAdmin/jquery.dataTables.js"></script>
+<script src="~/Scripts/SuperAdmin/dataTables.bootstrap4.js"></script>
+<script>
+        $(function () {
+
+            $('#example').DataTable({
+                "paging": true,
+                "ordering": true,
+                "info": true,
+            });
+        });
+</script>

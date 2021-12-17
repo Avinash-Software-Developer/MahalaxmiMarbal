@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Mahalaxmi_MarbelsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Tabel_Customer">
+    <Key>
+      <PropertyRef Name="Cust_Id" />
+    </Key>
+    <Property Name="Cust_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustName" Type="nvarchar" MaxLength="100" />
+    <Property Name="CustPh" Type="nvarchar" MaxLength="10" />
+    <Property Name="CustAddress" Type="nvarchar(max)" />
+    <Property Name="CustEmail" Type="nvarchar" MaxLength="100" />
+    <Property Name="Date" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Table_Bill">
+    <Key>
+      <PropertyRef Name="Bill_ID" />
+    </Key>
+    <Property Name="Bill_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Product_id" Type="int" />
+    <Property Name="Cust_Id" Type="int" />
+    <Property Name="TotalCost" Type="nvarchar" MaxLength="50" />
+    <Property Name="TotalQuantity" Type="nvarchar" MaxLength="50" />
+    <Property Name="Discount" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Table_OrderDeatils">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductDetailsId" Type="int" />
+    <Property Name="CustomerId" Type="int" />
+    <Property Name="TotalAmount" Type="nvarchar" MaxLength="50" />
+    <Property Name="TotalDiscount" Type="nvarchar" MaxLength="50" />
+    <Property Name="FinalAmount" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Table_Product">
+    <Key>
+      <PropertyRef Name="Product_id" />
+    </Key>
+    <Property Name="Product_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PName" Type="nvarchar" MaxLength="100" />
+    <Property Name="CreatedDate" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdatedDate" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Table_ProductDetails">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductId" Type="int" />
+    <Property Name="VendorId" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="150" />
+    <Property Name="Size" Type="nvarchar" MaxLength="50" />
+    <Property Name="Amount" Type="nvarchar" MaxLength="50" />
+    <Property Name="SellingAmount" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreatedDate" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdatedDate" Type="nvarchar" MaxLength="50" />
+    <Property Name="Quantity" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Table_Registration">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="150" />
+    <Property Name="Address" Type="nvarchar(max)" />
+    <Property Name="Mobile" Type="nvarchar" MaxLength="15" />
+    <Property Name="Username" Type="nvarchar" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Table_Vendor_Registration">
+    <Key>
+      <PropertyRef Name="Vendor_id" />
+    </Key>
+    <Property Name="Vendor_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Vendor_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Shop_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Vendor_Phone" Type="nvarchar" MaxLength="15" />
+    <Property Name="Shop_Phone" Type="nvarchar" MaxLength="15" />
+    <Property Name="Shop_Address" Type="nvarchar(max)" />
+    <Property Name="Vendor_Email" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Table_ProductDetails_Table_Product">
+    <End Role="Table_Product" Type="Self.Table_Product" Multiplicity="0..1" />
+    <End Role="Table_ProductDetails" Type="Self.Table_ProductDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Table_Product">
+        <PropertyRef Name="Product_id" />
+      </Principal>
+      <Dependent Role="Table_ProductDetails">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Table_ProductDetails_Table_Vendor_Registration">
+    <End Role="Table_Vendor_Registration" Type="Self.Table_Vendor_Registration" Multiplicity="0..1" />
+    <End Role="Table_ProductDetails" Type="Self.Table_ProductDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Table_Vendor_Registration">
+        <PropertyRef Name="Vendor_id" />
+      </Principal>
+      <Dependent Role="Table_ProductDetails">
+        <PropertyRef Name="VendorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Mahalaxmi_MarbelsModelStoreContainer">
+    <EntitySet Name="Tabel_Customer" EntityType="Self.Tabel_Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Table_Bill" EntityType="Self.Table_Bill" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Table_OrderDeatils" EntityType="Self.Table_OrderDeatils" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Table_Product" EntityType="Self.Table_Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Table_ProductDetails" EntityType="Self.Table_ProductDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Table_Registration" EntityType="Self.Table_Registration" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Table_Vendor_Registration" EntityType="Self.Table_Vendor_Registration" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Table_ProductDetails_Table_Product" Association="Self.FK_Table_ProductDetails_Table_Product">
+      <End Role="Table_Product" EntitySet="Table_Product" />
+      <End Role="Table_ProductDetails" EntitySet="Table_ProductDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Table_ProductDetails_Table_Vendor_Registration" Association="Self.FK_Table_ProductDetails_Table_Vendor_Registration">
+      <End Role="Table_Vendor_Registration" EntitySet="Table_Vendor_Registration" />
+      <End Role="Table_ProductDetails" EntitySet="Table_ProductDetails" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Mahalaxmi_MarbelsModelStoreContainer" CdmEntityContainer="Mahalaxmi_MarbelsEntities">
+    <EntitySetMapping Name="Tabel_Customer">
+      <EntityTypeMapping TypeName="Mahalaxmi_MarbelsModel.Tabel_Customer">
+        <MappingFragment StoreEntitySet="Tabel_Customer">
+          <ScalarProperty Name="Cust_Id" ColumnName="Cust_Id" />
+          <ScalarProperty Name="CustName" ColumnName="CustName" />
+          <ScalarProperty Name="CustPh" ColumnName="CustPh" />
+          <ScalarProperty Name="CustAddress" ColumnName="CustAddress" />
+          <ScalarProperty Name="CustEmail" ColumnName="CustEmail" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Table_Bill">
+      <EntityTypeMapping TypeName="Mahalaxmi_MarbelsModel.Table_Bill">
+        <MappingFragment StoreEntitySet="Table_Bill">
+          <ScalarProperty Name="Bill_ID" ColumnName="Bill_ID" />
+          <ScalarProperty Name="Product_id" ColumnName="Product_id" />
+          <ScalarProperty Name="Cust_Id" ColumnName="Cust_Id" />
+          <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+          <ScalarProperty Name="TotalQuantity" ColumnName="TotalQuantity" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Table_OrderDeatils">
+      <EntityTypeMapping TypeName="Mahalaxmi_MarbelsModel.Table_OrderDeatils">
+        <MappingFragment StoreEntitySet="Table_OrderDeatils">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ProductDetailsId" ColumnName="ProductDetailsId" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="TotalDiscount" ColumnName="TotalDiscount" />
+          <ScalarProperty Name="FinalAmount" ColumnName="FinalAmount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Table_Product">
+      <EntityTypeMapping TypeName="Mahalaxmi_MarbelsModel.Table_Product">
+        <MappingFragment StoreEntitySet="Table_Product">
+          <ScalarProperty Name="Product_id" ColumnName="Product_id" />
+          <ScalarProperty Name="PName" ColumnName="PName" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Table_ProductDetails">
+      <EntityTypeMapping TypeName="Mahalaxmi_MarbelsModel.Table_ProductDetails">
+        <MappingFragment StoreEntitySet="Table_ProductDetails">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Size" ColumnName="Size" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="SellingAmount" ColumnName="SellingAmount" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Table_Registration">
+      <EntityTypeMapping TypeName="Mahalaxmi_MarbelsModel.Table_Registration">
+        <MappingFragment StoreEntitySet="Table_Registration">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Table_Vendor_Registration">
+      <EntityTypeMapping TypeName="Mahalaxmi_MarbelsModel.Table_Vendor_Registration">
+        <MappingFragment StoreEntitySet="Table_Vendor_Registration">
+          <ScalarProperty Name="Vendor_id" ColumnName="Vendor_id" />
+          <ScalarProperty Name="Vendor_Name" ColumnName="Vendor_Name" />
+          <ScalarProperty Name="Shop_Name" ColumnName="Shop_Name" />
+          <ScalarProperty Name="Vendor_Phone" ColumnName="Vendor_Phone" />
+          <ScalarProperty Name="Shop_Phone" ColumnName="Shop_Phone" />
+          <ScalarProperty Name="Shop_Address" ColumnName="Shop_Address" />
+          <ScalarProperty Name="Vendor_Email" ColumnName="Vendor_Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

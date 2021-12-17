@@ -1,0 +1,70 @@
+﻿@model MahalaxmiMarbal.Models.Tabel_Customer
+
+@{
+    ViewBag.Title = "CustomerDetails";
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
+}
+
+<div class="content-wrapper">
+
+    <h2>CustomerDetails</h2>
+
+    <div>
+        <h4>Tabel_Customer</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Cust_Id)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Cust_Id)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CustName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CustName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CustPh)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CustPh)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CustAddress)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CustAddress)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CustEmail)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CustEmail)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Date)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Date)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</div>
