@@ -10,7 +10,7 @@ namespace MahalaxmiMarbal.Controllers
 {
     public class ProductController : Controller
     {
-        private Mahalaxmi_MarbelsEntities model = new Mahalaxmi_MarbelsEntities();
+        private Mahalaxmi_MarbelsEntities _Context = new Mahalaxmi_MarbelsEntities();
         // GET: Product
         public ActionResult Index()
         {
@@ -22,7 +22,7 @@ namespace MahalaxmiMarbal.Controllers
         {
             using (Mahalaxmi_MarbelsEntities model = new Mahalaxmi_MarbelsEntities())
             {
-                return View(model.Table_Product.ToList());
+                return View(_Context.Table_Product.ToList());
             }
 
         }
@@ -30,7 +30,7 @@ namespace MahalaxmiMarbal.Controllers
         [HttpGet]
         public ActionResult AllSubProductsDetails(int id)
         {
-            ViewBag.UserName = new SelectList(model.Table_Product.Where(b => b.Product_id == id).ToList());
+            ViewBag.UserName = new SelectList(_Context.Table_Product.Where(b => b.Product_id == id).ToList());
             return View();
             
         }
@@ -48,8 +48,8 @@ namespace MahalaxmiMarbal.Controllers
             {
                 using (Mahalaxmi_MarbelsEntities model = new Mahalaxmi_MarbelsEntities())
                 {
-                    model.Table_Product.Add(obj);
-                    model.SaveChanges();
+                    _Context.Table_Product.Add(obj);
+                    _Context.SaveChanges();
                 }
                 return RedirectToAction("AllProductsDetails");
             }
@@ -64,7 +64,7 @@ namespace MahalaxmiMarbal.Controllers
         {
             try
             {
-                Table_Product obj = model.Table_Product.Find(id);
+                Table_Product obj = _Context.Table_Product.Find(id);
                 if (obj == null)
                 {
                     return HttpNotFound();
@@ -80,15 +80,14 @@ namespace MahalaxmiMarbal.Controllers
         [HttpGet]
         public ActionResult UpdateProduct(int id)
         {
-            using (Mahalaxmi_MarbelsEntities model = new Mahalaxmi_MarbelsEntities())
-            {
-                Table_Product student = model.Table_Product.Find(id);
+            
+                Table_Product student = _Context.Table_Product.Find(id);
                 if (student == null)
                 {
                     return HttpNotFound();
                 }
                 return View(student);
-            }
+            
         }
 
         [HttpPost]
@@ -96,16 +95,15 @@ namespace MahalaxmiMarbal.Controllers
         {
             try
             {
-                using (Mahalaxmi_MarbelsEntities model = new Mahalaxmi_MarbelsEntities())
-                {
+               
                     if (ModelState.IsValid)
                     {
-                        model.Entry(obj).State = EntityState.Modified;
-                        model.SaveChanges();
+                        _Context.Entry(obj).State = EntityState.Modified;
+                        _Context.SaveChanges();
                         return RedirectToAction("AllProductsDetails");
                     }
                     return View(obj);
-                }
+                
             }
             catch
             {
