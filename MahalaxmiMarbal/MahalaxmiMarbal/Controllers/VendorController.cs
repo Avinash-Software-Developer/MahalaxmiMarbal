@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MahalaxmiMarbal.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,14 +9,16 @@ namespace MahalaxmiMarbal.Controllers
 {
     public class VendorController : Controller
     {
+        private Mahalaxmi_MarbelsEntities _Context = new Mahalaxmi_MarbelsEntities();
         // GET: Vendor
         public ActionResult Index()
         {
             return View();
         }
-        public ActionResult Test()
+        public ActionResult VendorList()
         {
-            return View();
+            var VendorList = _Context.Table_Vendor_Registration.OrderByDescending(a => a.Vendor_id).ToList();
+            return View(VendorList);
         }
     }
 }

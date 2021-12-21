@@ -16,24 +16,14 @@ namespace MahalaxmiMarbal.Controllers
         {
             return View();
         }
+       
         //GET: All Product Deatils Code Here
         [HttpGet]
         public ActionResult AllProductsDetails()
         {
-            using (Mahalaxmi_MarbelsEntities model = new Mahalaxmi_MarbelsEntities())
-            {
-                return View(_Context.Table_Product.ToList());
-            }
-
+            return View(_Context.Table_Product.ToList());
         }
-        //GET: All Product Deatils Code Here
-        [HttpGet]
-        public ActionResult AllSubProductsDetails(int id)
-        {
-            ViewBag.UserName = new SelectList(_Context.Table_Product.Where(b => b.Product_id == id).ToList());
-            return View();
-            
-        }
+        
         //Get: Insert Product Code
         [HttpGet]
         public ActionResult AddProduct()
@@ -46,11 +36,11 @@ namespace MahalaxmiMarbal.Controllers
         {
             try
             {
-                using (Mahalaxmi_MarbelsEntities model = new Mahalaxmi_MarbelsEntities())
-                {
-                    _Context.Table_Product.Add(obj);
-                    _Context.SaveChanges();
-                }
+                obj.CreatedDate = DateTime.Now.ToString();
+                obj.UpdatedDate = DateTime.Now.ToString();
+                _Context.Table_Product.Add(obj);
+                _Context.SaveChanges();
+
                 return RedirectToAction("AllProductsDetails");
             }
             catch
@@ -59,6 +49,11 @@ namespace MahalaxmiMarbal.Controllers
             }
 
         }
+        /// <summary>
+        /// get product by id for show single product details
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult ProductDetails(int id)
         {
@@ -80,14 +75,14 @@ namespace MahalaxmiMarbal.Controllers
         [HttpGet]
         public ActionResult UpdateProduct(int id)
         {
-            
-                Table_Product student = _Context.Table_Product.Find(id);
-                if (student == null)
-                {
-                    return HttpNotFound();
-                }
-                return View(student);
-            
+
+            Table_Product student = _Context.Table_Product.Find(id);
+            if (student == null)
+            {
+                return HttpNotFound();
+            }
+            return View(student);
+
         }
 
         [HttpPost]
@@ -95,15 +90,16 @@ namespace MahalaxmiMarbal.Controllers
         {
             try
             {
-               
-                    if (ModelState.IsValid)
-                    {
-                        _Context.Entry(obj).State = EntityState.Modified;
-                        _Context.SaveChanges();
-                        return RedirectToAction("AllProductsDetails");
-                    }
-                    return View(obj);
-                
+
+                if (ModelState.IsValid)
+                {
+                    obj.UpdatedDate = DateTime.Now.ToString();
+                    _Context.Entry(obj).State = EntityState.Modified;
+                    _Context.SaveChanges();
+                    return RedirectToAction("AllProductsDetails");
+                }
+                return View(obj);
+
             }
             catch
             {

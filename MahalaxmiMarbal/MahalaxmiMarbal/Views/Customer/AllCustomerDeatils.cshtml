@@ -4,10 +4,7 @@
     ViewBag.Title = "CustomerDeatilsAll";
     Layout = "~/Views/Shared/Admin_Layout.cshtml";
 }
-<link href="~/Content/SuperAdmin/dataTables.bootstrap4.css" rel="stylesheet" />
 
-
-<div class="content-wrapper">
 
     <div class="row" style="background-color:#343a40;">
 
@@ -82,17 +79,3 @@
         }
             </tbody>
     </table>
-</div>
-<script src="~/Scripts/SuperAdmin/jquery.min.js"></script>
-<script src="~/Scripts/SuperAdmin/jquery.dataTables.js"></script>
-<script src="~/Scripts/SuperAdmin/dataTables.bootstrap4.js"></script>
-<script>
-        $(function () {
-        
-            $('#example').DataTable({
-                "paging": true,
-                "ordering": true,
-                "info": true,                
-            });
-        });
-</script>

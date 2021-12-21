@@ -8,7 +8,7 @@
     <!-- Font Awesome Icons -->
     
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    
+    <link href="~/Content/SuperAdmin/dataTables.bootstrap4.css" rel="stylesheet" />
 
     <!-- overlayScrollbars -->
     
@@ -168,7 +168,7 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
-    with font-awesome or any other icon font library -->
+                        with font-awesome or any other icon font library -->
                         <li class="nav-item">
                             <a href="~/SuperAdmin/Index" class="nav-link active">
                                 <i class="fa fa-home nav-icon"></i>
@@ -176,7 +176,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="~/SuperAdmin/OrderDetails" class="nav-link ">
+                            <a href="~/Order/OrderList" class="nav-link ">
                                 <i class="fa fa-file nav-icon"></i>
                                 <p>Order Mangement</p>
                             </a>
@@ -195,21 +195,21 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="~/Vendor/AllVendorDeatils" class="nav-link">
+                            <a href="~/Vendor/VendorList" class="nav-link">
                                 <i class="fa fa-users nav-icon"></i>
                                 <p>Vendor Mangement</p>
                             </a>
                         </li>
 
                         @*<li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
-                <i class="nav-icon fa fa-th"></i>
-                <p>
-                    Widgets
-                    <span class="right badge badge-danger">New</span>
-                </p>
-            </a>
-        </li>*@
+                                <a href="pages/widgets.html" class="nav-link">
+                                    <i class="nav-icon fa fa-th"></i>
+                                    <p>
+                                        Widgets
+                                        <span class="right badge badge-danger">New</span>
+                                    </p>
+                                </a>
+                            </li>*@
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fa fa-copy"></i>
@@ -267,13 +267,16 @@
         </aside>
 
         <div class="container body-content" style="max-width:initial">
-            @RenderBody()
-            <hr />
+
+            <div class="content-wrapper">
+                @RenderBody()
+                <hr />
+            </div>
         </div>
 
         <!-- Main Footer -->
         <footer class="main-footer">
-            <strong>Copyright &copy; 2020 <a href="#">Mahlaxmi Marbels</a>.</strong>
+            <strong>Copyright &copy; 2021 <a href="#">Mahlaxmi Marbels</a>.</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
                 <b>Version</b> 1.0.0
@@ -283,7 +286,6 @@
     <!-- ./wrapper -->
     <!-- REQUIRED SCRIPTS -->
     <!-- jQuery -->
-
     @*<script src="~/Scripts/SuperAdmin/jquery.min.js"></script>*@
     <!-- Bootstrap -->
 
@@ -312,5 +314,19 @@
     <script src="~/Scripts/SuperAdmin/Chart.min.js"></script>
     <!-- PAGE SCRIPTS -->
     @*<script src="~/Scripts/SuperAdmin/dashboard2.js"></script>*@
+
+    <script src="~/Scripts/SuperAdmin/jquery.min.js"></script>
+    <script src="~/Scripts/SuperAdmin/jquery.dataTables.js"></script>
+    <script src="~/Scripts/SuperAdmin/dataTables.bootstrap4.js"></script>
+    <script>
+        $(function () {
+
+            $('#example').DataTable({
+                "paging": true,
+                "ordering": true,
+                "info": true,
+            });
+        });
+    </script>
 </body>
 </html>

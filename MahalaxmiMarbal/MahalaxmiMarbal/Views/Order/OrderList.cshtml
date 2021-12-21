@@ -1,0 +1,84 @@
+﻿@model IEnumerable<MahalaxmiMarbal.Models.Table_OrderDeatils>
+
+@{
+    ViewBag.Title = "OrderList";
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
+}
+
+
+    <div class="row" style="background-color:#343a40;">
+
+        <div class="col-12 col-sm-6 col-md-4">
+
+            @Html.ActionLink("Create New Order", "NewOrder", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-primary btn-large " })
+
+        </div>
+        <div class="col-12 col-sm-6 col-md-8">
+            <h4><b style="font-style:normal; color:white;">Order DETAILS</b></h4>
+
+        </div>
+
+    </div>
+    <br />
+    <table class="table table-bordered table-hover table-sm" id="example">
+        <thead>
+            <tr>
+                <th>
+                    Product Details Id
+                </th>
+                <th>
+                    Customer Name
+                </th>
+                <th>
+                    Total Amount
+                </th>
+                <th>
+                    Total Discount
+                </th>
+                <th>
+                    Final Amount
+                </th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductDetailsId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CustomerId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalAmount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalDiscount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FinalAmount)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+<script src="~/Scripts/SuperAdmin/jquery.min.js"></script>
+<script src="~/Scripts/SuperAdmin/jquery.dataTables.js"></script>
+<script src="~/Scripts/SuperAdmin/dataTables.bootstrap4.js"></script>
+<script>
+        $(function () {
+
+            $('#example').DataTable({
+                "paging": true,
+                "ordering": true,
+                "info": true,
+            });
+        });
+</script>
