@@ -13,6 +13,7 @@
         </div>
     </div>
     <br />
+    
     <table class="table table-bordered table-hover table-sm" id="example">
         <thead>
             <tr>
@@ -23,14 +24,15 @@
                     @Html.DisplayNameFor(model => model.PName)
                 </th>
                 <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
                     @Html.DisplayNameFor(model => model.CreatedDate)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.UpdatedDate)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Description)
-                </th>
+
                 <th>Action</th>
                 <th>Product Details</th>
             </tr>
@@ -38,31 +40,32 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Product_id)
-                    </td>
-                    <td>
-                        <a href="~/Product/AllSubProductsDetails?id=item.Product_id">  @Html.DisplayFor(modelItem => item.PName) </a>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CreatedDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.UpdatedDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "UpdateProduct", new { id = item.Product_id }) |
-                        @Html.ActionLink("Details", "ProductDetails", new { id = item.Product_id }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Product_id })
-                    </td>
-                    <td>
-                        <a href="/SubProduct/AllSubProductById?id=@item.Product_id">All SubProduct</a>
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product_id)
+                </td>
+                <td>
+                    <a href="/SubProduct/AllSubProductById?id=@item.Product_id">  @Html.DisplayFor(modelItem => item.PName) </a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdatedDate)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Edit", "UpdateProduct", new { id = item.Product_id }) |
+                    @Html.ActionLink("Details", "ProductDetails", new { id = item.Product_id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Product_id })
+                </td>
+                <td>
+                    <a href="/SubProduct/AllSubProductById?id=@item.Product_id">All SubProduct</a>
+                </td>
+            </tr>
             }
         </tbody>
     </table>

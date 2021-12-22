@@ -1,5 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="Mahalaxmi_MarbelsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
   <EntityType Name="Tabel_Customer">
     <Key>
       <PropertyRef Name="Cust_Id" />
@@ -22,6 +32,17 @@
     <Property Name="TotalQuantity" Type="nvarchar" MaxLength="50" />
     <Property Name="Discount" Type="nvarchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="Table_Order">
+    <Key>
+      <PropertyRef Name="OId" />
+    </Key>
+    <Property Name="OId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TotalAmount" Type="nvarchar" MaxLength="50" />
+    <Property Name="TotalPaid" Type="nvarchar" MaxLength="50" />
+    <Property Name="RemainingAmount" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreatedDate" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdatedDate" Type="nvarchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="Table_OrderDeatils">
     <Key>
       <PropertyRef Name="Id" />
@@ -32,6 +53,9 @@
     <Property Name="TotalAmount" Type="nvarchar" MaxLength="50" />
     <Property Name="TotalDiscount" Type="nvarchar" MaxLength="50" />
     <Property Name="FinalAmount" Type="nvarchar" MaxLength="50" />
+    <Property Name="OId" Type="int" />
+    <Property Name="CreatedDate" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdatedDate" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Table_Product">
     <Key>
@@ -81,6 +105,66 @@
     <Property Name="Shop_Address" Type="nvarchar(max)" />
     <Property Name="Vendor_Email" Type="nvarchar" MaxLength="50" />
   </EntityType>
+  <Association Name="FK_Table_Bill_Tabel_Customer">
+    <End Role="Tabel_Customer" Type="Self.Tabel_Customer" Multiplicity="0..1" />
+    <End Role="Table_Bill" Type="Self.Table_Bill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tabel_Customer">
+        <PropertyRef Name="Cust_Id" />
+      </Principal>
+      <Dependent Role="Table_Bill">
+        <PropertyRef Name="Cust_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Table_Bill_Table_Product">
+    <End Role="Table_Product" Type="Self.Table_Product" Multiplicity="0..1" />
+    <End Role="Table_Bill" Type="Self.Table_Bill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Table_Product">
+        <PropertyRef Name="Product_id" />
+      </Principal>
+      <Dependent Role="Table_Bill">
+        <PropertyRef Name="Product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Table_OrderDeatils_Tabel_Customer">
+    <End Role="Tabel_Customer" Type="Self.Tabel_Customer" Multiplicity="0..1" />
+    <End Role="Table_OrderDeatils" Type="Self.Table_OrderDeatils" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tabel_Customer">
+        <PropertyRef Name="Cust_Id" />
+      </Principal>
+      <Dependent Role="Table_OrderDeatils">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Table_OrderDeatils_Table_Order">
+    <End Role="Table_Order" Type="Self.Table_Order" Multiplicity="0..1" />
+    <End Role="Table_OrderDeatils" Type="Self.Table_OrderDeatils" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Table_Order">
+        <PropertyRef Name="OId" />
+      </Principal>
+      <Dependent Role="Table_OrderDeatils">
+        <PropertyRef Name="OId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Table_OrderDeatils_Table_ProductDetails">
+    <End Role="Table_ProductDetails" Type="Self.Table_ProductDetails" Multiplicity="0..1" />
+    <End Role="Table_OrderDeatils" Type="Self.Table_OrderDeatils" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Table_ProductDetails">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Table_OrderDeatils">
+        <PropertyRef Name="ProductDetailsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Table_ProductDetails_Table_Product">
     <End Role="Table_Product" Type="Self.Table_Product" Multiplicity="0..1" />
     <End Role="Table_ProductDetails" Type="Self.Table_ProductDetails" Multiplicity="*" />
@@ -105,14 +189,91 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="Customer_Deatils" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CustId" Type="int" Mode="In" />
+    <Parameter Name="CustName" Type="nvarchar" Mode="In" />
+    <Parameter Name="CustPh" Type="nvarchar" Mode="In" />
+    <Parameter Name="CustAddress" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="CustEmail" Type="nvarchar" Mode="In" />
+    <Parameter Name="Date" Type="nvarchar" Mode="In" />
+    <Parameter Name="Flag" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="Product_Deatils" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Product_id" Type="int" Mode="In" />
+    <Parameter Name="Product_Name" Type="nvarchar" Mode="In" />
+    <Parameter Name="flag" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="Vendor_Details" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Vendor_id" Type="int" Mode="In" />
+    <Parameter Name="Vendor_Name" Type="nvarchar" Mode="In" />
+    <Parameter Name="Shop_Name" Type="nvarchar" Mode="In" />
+    <Parameter Name="Vendor_Phone" Type="nvarchar" Mode="In" />
+    <Parameter Name="Shop_Phone" Type="nvarchar" Mode="In" />
+    <Parameter Name="Shop_Address" Type="nvarchar" Mode="In" />
+    <Parameter Name="Vendor_Email" Type="nvarchar" Mode="In" />
+    <Parameter Name="flag" Type="nvarchar" Mode="In" />
+  </Function>
   <EntityContainer Name="Mahalaxmi_MarbelsModelStoreContainer">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Tabel_Customer" EntityType="Self.Tabel_Customer" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Table_Bill" EntityType="Self.Table_Bill" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Table_Order" EntityType="Self.Table_Order" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Table_OrderDeatils" EntityType="Self.Table_OrderDeatils" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Table_Product" EntityType="Self.Table_Product" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Table_ProductDetails" EntityType="Self.Table_ProductDetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Table_Registration" EntityType="Self.Table_Registration" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Table_Vendor_Registration" EntityType="Self.Table_Vendor_Registration" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Table_Bill_Tabel_Customer" Association="Self.FK_Table_Bill_Tabel_Customer">
+      <End Role="Tabel_Customer" EntitySet="Tabel_Customer" />
+      <End Role="Table_Bill" EntitySet="Table_Bill" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Table_Bill_Table_Product" Association="Self.FK_Table_Bill_Table_Product">
+      <End Role="Table_Product" EntitySet="Table_Product" />
+      <End Role="Table_Bill" EntitySet="Table_Bill" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Table_OrderDeatils_Tabel_Customer" Association="Self.FK_Table_OrderDeatils_Tabel_Customer">
+      <End Role="Tabel_Customer" EntitySet="Tabel_Customer" />
+      <End Role="Table_OrderDeatils" EntitySet="Table_OrderDeatils" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Table_OrderDeatils_Table_Order" Association="Self.FK_Table_OrderDeatils_Table_Order">
+      <End Role="Table_Order" EntitySet="Table_Order" />
+      <End Role="Table_OrderDeatils" EntitySet="Table_OrderDeatils" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Table_OrderDeatils_Table_ProductDetails" Association="Self.FK_Table_OrderDeatils_Table_ProductDetails">
+      <End Role="Table_ProductDetails" EntitySet="Table_ProductDetails" />
+      <End Role="Table_OrderDeatils" EntitySet="Table_OrderDeatils" />
+    </AssociationSet>
     <AssociationSet Name="FK_Table_ProductDetails_Table_Product" Association="Self.FK_Table_ProductDetails_Table_Product">
       <End Role="Table_Product" EntitySet="Table_Product" />
       <End Role="Table_ProductDetails" EntitySet="Table_ProductDetails" />

@@ -1,5 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="Mahalaxmi_MarbelsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
   <EntityType Name="Tabel_Customer">
     <Key>
       <PropertyRef Name="Cust_Id" />
@@ -10,6 +20,8 @@
     <Property Name="CustAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="CustEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="Date" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Table_Bill" Relationship="Self.FK_Table_Bill_Tabel_Customer" FromRole="Tabel_Customer" ToRole="Table_Bill" />
+    <NavigationProperty Name="Table_OrderDeatils" Relationship="Self.FK_Table_OrderDeatils_Tabel_Customer" FromRole="Tabel_Customer" ToRole="Table_OrderDeatils" />
   </EntityType>
   <EntityType Name="Table_Bill">
     <Key>
@@ -21,6 +33,20 @@
     <Property Name="TotalCost" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="TotalQuantity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Discount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Tabel_Customer" Relationship="Self.FK_Table_Bill_Tabel_Customer" FromRole="Table_Bill" ToRole="Tabel_Customer" />
+    <NavigationProperty Name="Table_Product" Relationship="Self.FK_Table_Bill_Table_Product" FromRole="Table_Bill" ToRole="Table_Product" />
+  </EntityType>
+  <EntityType Name="Table_Order">
+    <Key>
+      <PropertyRef Name="OId" />
+    </Key>
+    <Property Name="OId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TotalAmount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TotalPaid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RemainingAmount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UpdatedDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Table_OrderDeatils" Relationship="Self.FK_Table_OrderDeatils_Table_Order" FromRole="Table_Order" ToRole="Table_OrderDeatils" />
   </EntityType>
   <EntityType Name="Table_OrderDeatils">
     <Key>
@@ -32,6 +58,12 @@
     <Property Name="TotalAmount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="TotalDiscount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="FinalAmount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="OId" Type="Int32" />
+    <Property Name="CreatedDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UpdatedDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Tabel_Customer" Relationship="Self.FK_Table_OrderDeatils_Tabel_Customer" FromRole="Table_OrderDeatils" ToRole="Tabel_Customer" />
+    <NavigationProperty Name="Table_Order" Relationship="Self.FK_Table_OrderDeatils_Table_Order" FromRole="Table_OrderDeatils" ToRole="Table_Order" />
+    <NavigationProperty Name="Table_ProductDetails" Relationship="Self.FK_Table_OrderDeatils_Table_ProductDetails" FromRole="Table_OrderDeatils" ToRole="Table_ProductDetails" />
   </EntityType>
   <EntityType Name="Table_Product">
     <Key>
@@ -42,6 +74,7 @@
     <Property Name="CreatedDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="UpdatedDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Table_Bill" Relationship="Self.FK_Table_Bill_Table_Product" FromRole="Table_Product" ToRole="Table_Bill" />
     <NavigationProperty Name="Table_ProductDetails" Relationship="Self.FK_Table_ProductDetails_Table_Product" FromRole="Table_Product" ToRole="Table_ProductDetails" />
   </EntityType>
   <EntityType Name="Table_ProductDetails">
@@ -58,6 +91,7 @@
     <Property Name="CreatedDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="UpdatedDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Quantity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Table_OrderDeatils" Relationship="Self.FK_Table_OrderDeatils_Table_ProductDetails" FromRole="Table_ProductDetails" ToRole="Table_OrderDeatils" />
     <NavigationProperty Name="Table_Product" Relationship="Self.FK_Table_ProductDetails_Table_Product" FromRole="Table_ProductDetails" ToRole="Table_Product" />
     <NavigationProperty Name="Table_Vendor_Registration" Relationship="Self.FK_Table_ProductDetails_Table_Vendor_Registration" FromRole="Table_ProductDetails" ToRole="Table_Vendor_Registration" />
   </EntityType>
@@ -85,6 +119,66 @@
     <Property Name="Vendor_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Table_ProductDetails" Relationship="Self.FK_Table_ProductDetails_Table_Vendor_Registration" FromRole="Table_Vendor_Registration" ToRole="Table_ProductDetails" />
   </EntityType>
+  <Association Name="FK_Table_Bill_Tabel_Customer">
+    <End Role="Tabel_Customer" Type="Self.Tabel_Customer" Multiplicity="0..1" />
+    <End Role="Table_Bill" Type="Self.Table_Bill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tabel_Customer">
+        <PropertyRef Name="Cust_Id" />
+      </Principal>
+      <Dependent Role="Table_Bill">
+        <PropertyRef Name="Cust_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Table_OrderDeatils_Tabel_Customer">
+    <End Role="Tabel_Customer" Type="Self.Tabel_Customer" Multiplicity="0..1" />
+    <End Role="Table_OrderDeatils" Type="Self.Table_OrderDeatils" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tabel_Customer">
+        <PropertyRef Name="Cust_Id" />
+      </Principal>
+      <Dependent Role="Table_OrderDeatils">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Table_Bill_Table_Product">
+    <End Role="Table_Product" Type="Self.Table_Product" Multiplicity="0..1" />
+    <End Role="Table_Bill" Type="Self.Table_Bill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Table_Product">
+        <PropertyRef Name="Product_id" />
+      </Principal>
+      <Dependent Role="Table_Bill">
+        <PropertyRef Name="Product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Table_OrderDeatils_Table_Order">
+    <End Role="Table_Order" Type="Self.Table_Order" Multiplicity="0..1" />
+    <End Role="Table_OrderDeatils" Type="Self.Table_OrderDeatils" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Table_Order">
+        <PropertyRef Name="OId" />
+      </Principal>
+      <Dependent Role="Table_OrderDeatils">
+        <PropertyRef Name="OId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Table_OrderDeatils_Table_ProductDetails">
+    <End Role="Table_ProductDetails" Type="Self.Table_ProductDetails" Multiplicity="0..1" />
+    <End Role="Table_OrderDeatils" Type="Self.Table_OrderDeatils" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Table_ProductDetails">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Table_OrderDeatils">
+        <PropertyRef Name="ProductDetailsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Table_ProductDetails_Table_Product">
     <End Role="Table_Product" Type="Self.Table_Product" Multiplicity="0..1" />
     <End Role="Table_ProductDetails" Type="Self.Table_ProductDetails" Multiplicity="*" />
@@ -109,14 +203,36 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="Mahalaxmi_MarbelsEntities" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="Mahalaxmi_MarbelsEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="Tabel_Customer" EntityType="Self.Tabel_Customer" />
     <EntitySet Name="Table_Bill" EntityType="Self.Table_Bill" />
+    <EntitySet Name="Table_Order" EntityType="Self.Table_Order" />
     <EntitySet Name="Table_OrderDeatils" EntityType="Self.Table_OrderDeatils" />
     <EntitySet Name="Table_Product" EntityType="Self.Table_Product" />
     <EntitySet Name="Table_ProductDetails" EntityType="Self.Table_ProductDetails" />
     <EntitySet Name="Table_Registration" EntityType="Self.Table_Registration" />
     <EntitySet Name="Table_Vendor_Registration" EntityType="Self.Table_Vendor_Registration" />
+    <AssociationSet Name="FK_Table_Bill_Tabel_Customer" Association="Self.FK_Table_Bill_Tabel_Customer">
+      <End Role="Tabel_Customer" EntitySet="Tabel_Customer" />
+      <End Role="Table_Bill" EntitySet="Table_Bill" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Table_OrderDeatils_Tabel_Customer" Association="Self.FK_Table_OrderDeatils_Tabel_Customer">
+      <End Role="Tabel_Customer" EntitySet="Tabel_Customer" />
+      <End Role="Table_OrderDeatils" EntitySet="Table_OrderDeatils" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Table_Bill_Table_Product" Association="Self.FK_Table_Bill_Table_Product">
+      <End Role="Table_Product" EntitySet="Table_Product" />
+      <End Role="Table_Bill" EntitySet="Table_Bill" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Table_OrderDeatils_Table_Order" Association="Self.FK_Table_OrderDeatils_Table_Order">
+      <End Role="Table_Order" EntitySet="Table_Order" />
+      <End Role="Table_OrderDeatils" EntitySet="Table_OrderDeatils" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Table_OrderDeatils_Table_ProductDetails" Association="Self.FK_Table_OrderDeatils_Table_ProductDetails">
+      <End Role="Table_ProductDetails" EntitySet="Table_ProductDetails" />
+      <End Role="Table_OrderDeatils" EntitySet="Table_OrderDeatils" />
+    </AssociationSet>
     <AssociationSet Name="FK_Table_ProductDetails_Table_Product" Association="Self.FK_Table_ProductDetails_Table_Product">
       <End Role="Table_Product" EntitySet="Table_Product" />
       <End Role="Table_ProductDetails" EntitySet="Table_ProductDetails" />
@@ -125,5 +241,78 @@
       <End Role="Table_Vendor_Registration" EntitySet="Table_Vendor_Registration" />
       <End Role="Table_ProductDetails" EntitySet="Table_ProductDetails" />
     </AssociationSet>
+    <FunctionImport Name="Customer_Deatils" ReturnType="Collection(Mahalaxmi_MarbelsModel.Customer_Deatils_Result)">
+      <Parameter Name="CustId" Mode="In" Type="Int32" />
+      <Parameter Name="CustName" Mode="In" Type="String" />
+      <Parameter Name="CustPh" Mode="In" Type="String" />
+      <Parameter Name="CustAddress" Mode="In" Type="String" />
+      <Parameter Name="CustEmail" Mode="In" Type="String" />
+      <Parameter Name="Date" Mode="In" Type="String" />
+      <Parameter Name="Flag" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Product_Deatils">
+      <Parameter Name="Product_id" Mode="In" Type="Int32" />
+      <Parameter Name="Product_Name" Mode="In" Type="String" />
+      <Parameter Name="flag" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(Mahalaxmi_MarbelsModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(Mahalaxmi_MarbelsModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <FunctionImport Name="Vendor_Details">
+      <Parameter Name="Vendor_id" Mode="In" Type="Int32" />
+      <Parameter Name="Vendor_Name" Mode="In" Type="String" />
+      <Parameter Name="Shop_Name" Mode="In" Type="String" />
+      <Parameter Name="Vendor_Phone" Mode="In" Type="String" />
+      <Parameter Name="Shop_Phone" Mode="In" Type="String" />
+      <Parameter Name="Shop_Address" Mode="In" Type="String" />
+      <Parameter Name="Vendor_Email" Mode="In" Type="String" />
+      <Parameter Name="flag" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
+  <ComplexType Name="Customer_Deatils_Result">
+    <Property Type="Int32" Name="Cust_Id" Nullable="false" />
+    <Property Type="String" Name="CustName" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="CustPh" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="CustAddress" Nullable="true" />
+    <Property Type="String" Name="CustEmail" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Date" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
 </Schema>

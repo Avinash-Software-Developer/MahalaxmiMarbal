@@ -42,9 +42,7 @@ namespace MahalaxmiMarbal.Controllers
             {
                 return View();
             }
-
         }
-
 
         public ActionResult tempdata()
         {
@@ -58,7 +56,7 @@ namespace MahalaxmiMarbal.Controllers
             {
                 string newstdid;
 
-                newstdid = "RTS" + (10000 + dr["StdID"].ToString());
+                newstdid = "MAHB" + (10000 + dr["StdID"].ToString());
 
                 objcust.Cust_Id = Convert.ToInt32(newstdid);
 

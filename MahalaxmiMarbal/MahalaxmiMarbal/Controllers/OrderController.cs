@@ -17,12 +17,24 @@ namespace MahalaxmiMarbal.Controllers
         }
         public ActionResult OrderList()
         {
-            var OrderList = _Context.Table_OrderDeatils.OrderByDescending(a=>a.CustomerId).ToList();
+            var OrderList = _Context.Table_OrderDeatils.OrderByDescending(a=>a.Id).ToList();
             return View(OrderList);
         }
         public ActionResult NewOrder()
         {
+            var CustomerList = _Context.Tabel_Customer.OrderByDescending(a => a.Cust_Id).ToList();
+            ViewBag.CustomerList = CustomerList;
+            var ProductList = _Context.Table_ProductDetails.ToList();
+            ViewBag.ProductList = ProductList;
             return View();
+        }
+        [HttpGet]
+        public JsonResult GetProduct()
+        {
+            var ProductList = _Context.Table_ProductDetails.ToList();
+            ViewBag.ProductList = ProductList;
+            return Json(ProductList);
+
         }
     }
 }
