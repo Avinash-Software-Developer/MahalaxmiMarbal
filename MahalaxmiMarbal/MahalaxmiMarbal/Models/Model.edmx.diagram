@@ -4,14 +4,21 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="fe065647741d4a008bb8c29c9c3f0483" Name="Diagram1">
-        <EntityTypeShape EntityType="Mahalaxmi_MarbelsModel.Tabel_Customer" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Mahalaxmi_MarbelsModel.Table_Bill" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Mahalaxmi_MarbelsModel.Table_OrderDeatils" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Mahalaxmi_MarbelsModel.Table_Product" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Mahalaxmi_MarbelsModel.Table_ProductDetails" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="Mahalaxmi_MarbelsModel.Table_Registration" Width="1.5" PointX="4.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Mahalaxmi_MarbelsModel.Table_Vendor_Registration" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+      <Diagram DiagramId="42588d3fa5f34fb9b67f0d313bc8d01c" Name="Diagram1">
+        <EntityTypeShape EntityType="Mahalaxmi_MarbelsModel.sysdiagram" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Mahalaxmi_MarbelsModel.Tabel_Customer" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Mahalaxmi_MarbelsModel.Table_Bill" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Mahalaxmi_MarbelsModel.Table_Order" Width="1.5" PointX="6" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Mahalaxmi_MarbelsModel.Table_OrderDeatils" Width="1.5" PointX="8.25" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Mahalaxmi_MarbelsModel.Table_Product" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Mahalaxmi_MarbelsModel.Table_ProductDetails" Width="1.5" PointX="6" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Mahalaxmi_MarbelsModel.Table_Registration" Width="1.5" PointX="2.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Mahalaxmi_MarbelsModel.Table_Vendor_Registration" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="Mahalaxmi_MarbelsModel.FK_Table_Bill_Tabel_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="Mahalaxmi_MarbelsModel.FK_Table_OrderDeatils_Tabel_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="Mahalaxmi_MarbelsModel.FK_Table_Bill_Table_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="Mahalaxmi_MarbelsModel.FK_Table_OrderDeatils_Table_Order" ManuallyRouted="false" />
+        <AssociationConnector Association="Mahalaxmi_MarbelsModel.FK_Table_OrderDeatils_Table_ProductDetails" ManuallyRouted="false" />
         <AssociationConnector Association="Mahalaxmi_MarbelsModel.FK_Table_ProductDetails_Table_Product" ManuallyRouted="false" />
         <AssociationConnector Association="Mahalaxmi_MarbelsModel.FK_Table_ProductDetails_Table_Vendor_Registration" ManuallyRouted="false" />
       </Diagram>

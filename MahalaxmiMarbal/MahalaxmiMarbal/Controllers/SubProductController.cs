@@ -30,18 +30,19 @@ namespace MahalaxmiMarbal.Controllers
             }
             else
             {
-                return RedirectToAction("Product", "AllProductsDetails");
+                return RedirectToAction("AllProductsDetails", "Product");
             }
         }
         #region add product
         [HttpGet]
-        public ActionResult AddSubProduct()
+        public ActionResult AddSubProduct(int? id)
         {
             var items = _Context.Table_Vendor_Registration.ToList();
             if (items != null)
             {
                 ViewBag.data = items;
             }
+            ViewBag.ProductId = id;
             return View();
         }
         [HttpPost]

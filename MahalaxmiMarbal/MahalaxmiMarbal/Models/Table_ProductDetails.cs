@@ -14,6 +14,12 @@ namespace MahalaxmiMarbal.Models
     
     public partial class Table_ProductDetails
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Table_ProductDetails()
+        {
+            this.Table_OrderDeatils = new HashSet<Table_OrderDeatils>();
+        }
+    
         public int Id { get; set; }
         public Nullable<int> ProductId { get; set; }
         public Nullable<int> VendorId { get; set; }
@@ -25,6 +31,8 @@ namespace MahalaxmiMarbal.Models
         public string UpdatedDate { get; set; }
         public string Quantity { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Table_OrderDeatils> Table_OrderDeatils { get; set; }
         public virtual Table_Product Table_Product { get; set; }
         public virtual Table_Vendor_Registration Table_Vendor_Registration { get; set; }
     }

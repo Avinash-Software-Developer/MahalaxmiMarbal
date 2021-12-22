@@ -7,13 +7,17 @@
 
 <div class="row" style="background-color:#343a40;">
     <div class="col-12 col-sm-6 col-md-4">
-        @Html.ActionLink("Create New", "AddSubProduct", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-primary btn-large " })
-    </div>
+        @foreach (var item in Model)
+        {
+            @Html.ActionLink("Create SubProduct", "AddSubProduct", new { id = item.ProductId }, new { @class = "btn btn-primary btn-large " })
+            break;
+        }
+        </div>
     <div class="col-12 col-sm-6 col-md-8">
         <h4><b style="font-style:normal; color:white;">PRODUCT DETAILS</b></h4>
     </div>
 </div>
-<br />
+
 <table class="table table-bordered table-hover table-sm" id="example">
     <thead>
         <tr>

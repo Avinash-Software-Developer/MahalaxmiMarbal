@@ -10,6 +10,7 @@ namespace MahalaxmiMarbal.Controllers
 {
     public class CustomerController : Controller
     {
+        private Mahalaxmi_MarbelsEntities _Context = new Mahalaxmi_MarbelsEntities();
         // GET: Customer
         public ActionResult Index()
         {
@@ -18,11 +19,7 @@ namespace MahalaxmiMarbal.Controllers
         //GET: All Customer Deatils Code Here
         public ActionResult AllCustomerDeatils()
         {
-            using (Mahalaxmi_MarbelsEntities model = new Mahalaxmi_MarbelsEntities())
-            {
-                return View(model.Tabel_Customer.ToList());
-            }
-
+            return View(_Context.Tabel_Customer.ToList());
         }
         //GET: Add New Customer Design
         [HttpGet]
@@ -37,12 +34,8 @@ namespace MahalaxmiMarbal.Controllers
         {
             try
             {
-                using (Mahalaxmi_MarbelsEntities model = new Mahalaxmi_MarbelsEntities())
-                {
-                    model.Tabel_Customer.Add(obj);
-                    model.SaveChanges();
-                    //int Cust_Id;
-                }
+                _Context.Tabel_Customer.Add(obj);
+                _Context.SaveChanges();
                 return RedirectToAction("AllCustomerDeatils");
             }
             catch
@@ -78,10 +71,7 @@ namespace MahalaxmiMarbal.Controllers
         //Get:Customer/Deatils/Id
         public ActionResult CustomerDetails(int id)
         {
-            using (Mahalaxmi_MarbelsEntities model = new Mahalaxmi_MarbelsEntities())
-            {
-                return View(model.Tabel_Customer.Where(x => x.Cust_Id == id).FirstOrDefault());
-            }
+           return View(_Context.Tabel_Customer.Where(x => x.Cust_Id == id).FirstOrDefault());
         }
         //=============All Customer tab Code End Here=================
 

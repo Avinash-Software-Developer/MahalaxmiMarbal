@@ -12,20 +12,22 @@ namespace MahalaxmiMarbal.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Table_OrderDeatils
+    public partial class Table_Order
     {
-        public int Id { get; set; }
-        public Nullable<int> ProductDetailsId { get; set; }
-        public Nullable<int> CustomerId { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Table_Order()
+        {
+            this.Table_OrderDeatils = new HashSet<Table_OrderDeatils>();
+        }
+    
+        public int OId { get; set; }
         public string TotalAmount { get; set; }
-        public string TotalDiscount { get; set; }
-        public string FinalAmount { get; set; }
-        public Nullable<int> OId { get; set; }
+        public string TotalPaid { get; set; }
+        public string RemainingAmount { get; set; }
         public string CreatedDate { get; set; }
         public string UpdatedDate { get; set; }
     
-        public virtual Tabel_Customer Tabel_Customer { get; set; }
-        public virtual Table_Order Table_Order { get; set; }
-        public virtual Table_ProductDetails Table_ProductDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Table_OrderDeatils> Table_OrderDeatils { get; set; }
     }
 }

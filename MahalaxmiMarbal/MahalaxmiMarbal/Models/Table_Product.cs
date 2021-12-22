@@ -17,6 +17,7 @@ namespace MahalaxmiMarbal.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Table_Product()
         {
+            this.Table_Bill = new HashSet<Table_Bill>();
             this.Table_ProductDetails = new HashSet<Table_ProductDetails>();
         }
     
@@ -26,6 +27,8 @@ namespace MahalaxmiMarbal.Models
         public string UpdatedDate { get; set; }
         public string Description { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Table_Bill> Table_Bill { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Table_ProductDetails> Table_ProductDetails { get; set; }
     }

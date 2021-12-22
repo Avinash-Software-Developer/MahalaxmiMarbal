@@ -12,6 +12,8 @@ namespace MahalaxmiMarbal.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class Mahalaxmi_MarbelsEntities : DbContext
     {
@@ -25,12 +27,204 @@ namespace MahalaxmiMarbal.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Tabel_Customer> Tabel_Customer { get; set; }
         public virtual DbSet<Table_Bill> Table_Bill { get; set; }
+        public virtual DbSet<Table_Order> Table_Order { get; set; }
         public virtual DbSet<Table_OrderDeatils> Table_OrderDeatils { get; set; }
         public virtual DbSet<Table_Product> Table_Product { get; set; }
         public virtual DbSet<Table_ProductDetails> Table_ProductDetails { get; set; }
         public virtual DbSet<Table_Registration> Table_Registration { get; set; }
         public virtual DbSet<Table_Vendor_Registration> Table_Vendor_Registration { get; set; }
+    
+        public virtual ObjectResult<Customer_Deatils_Result> Customer_Deatils(Nullable<int> custId, string custName, string custPh, string custAddress, string custEmail, string date, string flag)
+        {
+            var custIdParameter = custId.HasValue ?
+                new ObjectParameter("CustId", custId) :
+                new ObjectParameter("CustId", typeof(int));
+    
+            var custNameParameter = custName != null ?
+                new ObjectParameter("CustName", custName) :
+                new ObjectParameter("CustName", typeof(string));
+    
+            var custPhParameter = custPh != null ?
+                new ObjectParameter("CustPh", custPh) :
+                new ObjectParameter("CustPh", typeof(string));
+    
+            var custAddressParameter = custAddress != null ?
+                new ObjectParameter("CustAddress", custAddress) :
+                new ObjectParameter("CustAddress", typeof(string));
+    
+            var custEmailParameter = custEmail != null ?
+                new ObjectParameter("CustEmail", custEmail) :
+                new ObjectParameter("CustEmail", typeof(string));
+    
+            var dateParameter = date != null ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(string));
+    
+            var flagParameter = flag != null ?
+                new ObjectParameter("Flag", flag) :
+                new ObjectParameter("Flag", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Customer_Deatils_Result>("Customer_Deatils", custIdParameter, custNameParameter, custPhParameter, custAddressParameter, custEmailParameter, dateParameter, flagParameter);
+        }
+    
+        public virtual int Product_Deatils(Nullable<int> product_id, string product_Name, string flag)
+        {
+            var product_idParameter = product_id.HasValue ?
+                new ObjectParameter("Product_id", product_id) :
+                new ObjectParameter("Product_id", typeof(int));
+    
+            var product_NameParameter = product_Name != null ?
+                new ObjectParameter("Product_Name", product_Name) :
+                new ObjectParameter("Product_Name", typeof(string));
+    
+            var flagParameter = flag != null ?
+                new ObjectParameter("flag", flag) :
+                new ObjectParameter("flag", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Product_Deatils", product_idParameter, product_NameParameter, flagParameter);
+        }
+    
+        public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(int));
+    
+            var definitionParameter = definition != null ?
+                new ObjectParameter("definition", definition) :
+                new ObjectParameter("definition", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_alterdiagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
+        }
+    
+        public virtual int sp_creatediagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(int));
+    
+            var definitionParameter = definition != null ?
+                new ObjectParameter("definition", definition) :
+                new ObjectParameter("definition", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_creatediagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
+        }
+    
+        public virtual int sp_dropdiagram(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_dropdiagram", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual ObjectResult<sp_helpdiagramdefinition_Result> sp_helpdiagramdefinition(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagramdefinition_Result>("sp_helpdiagramdefinition", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual ObjectResult<sp_helpdiagrams_Result> sp_helpdiagrams(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagrams_Result>("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var new_diagramnameParameter = new_diagramname != null ?
+                new ObjectParameter("new_diagramname", new_diagramname) :
+                new ObjectParameter("new_diagramname", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_renamediagram", diagramnameParameter, owner_idParameter, new_diagramnameParameter);
+        }
+    
+        public virtual int sp_upgraddiagrams()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
+        }
+    
+        public virtual int Vendor_Details(Nullable<int> vendor_id, string vendor_Name, string shop_Name, string vendor_Phone, string shop_Phone, string shop_Address, string vendor_Email, string flag)
+        {
+            var vendor_idParameter = vendor_id.HasValue ?
+                new ObjectParameter("Vendor_id", vendor_id) :
+                new ObjectParameter("Vendor_id", typeof(int));
+    
+            var vendor_NameParameter = vendor_Name != null ?
+                new ObjectParameter("Vendor_Name", vendor_Name) :
+                new ObjectParameter("Vendor_Name", typeof(string));
+    
+            var shop_NameParameter = shop_Name != null ?
+                new ObjectParameter("Shop_Name", shop_Name) :
+                new ObjectParameter("Shop_Name", typeof(string));
+    
+            var vendor_PhoneParameter = vendor_Phone != null ?
+                new ObjectParameter("Vendor_Phone", vendor_Phone) :
+                new ObjectParameter("Vendor_Phone", typeof(string));
+    
+            var shop_PhoneParameter = shop_Phone != null ?
+                new ObjectParameter("Shop_Phone", shop_Phone) :
+                new ObjectParameter("Shop_Phone", typeof(string));
+    
+            var shop_AddressParameter = shop_Address != null ?
+                new ObjectParameter("Shop_Address", shop_Address) :
+                new ObjectParameter("Shop_Address", typeof(string));
+    
+            var vendor_EmailParameter = vendor_Email != null ?
+                new ObjectParameter("Vendor_Email", vendor_Email) :
+                new ObjectParameter("Vendor_Email", typeof(string));
+    
+            var flagParameter = flag != null ?
+                new ObjectParameter("flag", flag) :
+                new ObjectParameter("flag", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Vendor_Details", vendor_idParameter, vendor_NameParameter, shop_NameParameter, vendor_PhoneParameter, shop_PhoneParameter, shop_AddressParameter, vendor_EmailParameter, flagParameter);
+        }
     }
 }

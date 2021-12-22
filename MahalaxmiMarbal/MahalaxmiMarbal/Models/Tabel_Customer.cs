@@ -14,11 +14,23 @@ namespace MahalaxmiMarbal.Models
     
     public partial class Tabel_Customer
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Tabel_Customer()
+        {
+            this.Table_Bill = new HashSet<Table_Bill>();
+            this.Table_OrderDeatils = new HashSet<Table_OrderDeatils>();
+        }
+    
         public int Cust_Id { get; set; }
         public string CustName { get; set; }
         public string CustPh { get; set; }
         public string CustAddress { get; set; }
         public string CustEmail { get; set; }
         public string Date { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Table_Bill> Table_Bill { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Table_OrderDeatils> Table_OrderDeatils { get; set; }
     }
 }
